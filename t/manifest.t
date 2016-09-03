@@ -4,6 +4,10 @@ use strict;
 use warnings;
 use Test::More;
 
+if ( $ENV{TRAVIS_PERL_VERSION} ) {
+    plan( skip_all => "Detected Travis environment - skipping test" );
+}
+
 unless ( $ENV{RELEASE_TESTING} ) {
     plan( skip_all => "Author tests not required for installation" );
 }
