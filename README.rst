@@ -1,11 +1,15 @@
 =========
 App::CELL
 =========
+
+[![Build Status](https://travis-ci.org/smithfarm/cell.svg?branch=master)](https://travis-ci.org/smithfarm/smithfarm/cell)
+[![CPAN version](https://badge.fury.io/pl/App-CELL.svg)](https://badge.fury.io/pl/App-CELL)
+
 --------------------------------------------------------------------
 Configuration, Error-handling, Localization, and Logging "framework"
 --------------------------------------------------------------------
 
-Documentation 
+Documentation
 =============
 
 http://metacpan.org/pod/App::CELL
