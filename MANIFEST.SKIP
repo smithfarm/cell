@@ -1,4 +1,3 @@
-
 #!start included /usr/lib/perl5/5.18.1/ExtUtils/MANIFEST.SKIP
 # Avoid version control files.
 \bRCS\b
@@ -76,3 +75,7 @@
 \bCPAN_NAME$
 \bOBS_PROJECT$
 \bVERSION_MODULE$
+
+# Avoid perlcritic, travis config files
+\B\.perlcriticrc\b
+\B\.travis.yml\b
