@@ -854,3 +854,11 @@ later are in the perl-CELL project repo.
 - README: eliminate README duplication
 - t/000-dependencies.t: do not check Module::Build
 
+0.220 2016-09-04 09:12 CEST
+- t/050-load.t: send too many parameters to set()
+- release: use central release scripting
+- doc: fix POD line in App::CELL::Status
+- Add .travis.yml and badges on the README
+- MANIFEST.SKIP: avoid Perl Critic and Travis config files
+- test: try using TRAVIS_PERL_VERSION to detect Travis
+
