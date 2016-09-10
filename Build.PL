@@ -44,6 +44,7 @@ my $build = Module::Build->new(
         }
     },
     add_to_cleanup     => [ 'App-CELL-*' ],
+    create_makefile_pl => 'traditional',
 );
 
 $build->create_build_script;
