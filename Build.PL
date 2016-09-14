@@ -20,6 +20,7 @@ my $build = Module::Build->new(
     },
     build_requires     => { 
         'Log::Any::Test'     => 0,
+        'File::ShareDir::Install' => 0.11,
         'File::Spec'         => 0,
         'File::Temp'         => 0,
         'Params::Validate'   => 0,
@@ -30,7 +31,7 @@ my $build = Module::Build->new(
         'perl'                  => 5.012,
         'Date::Format'          => 0,
         'File::HomeDir'         => 0,
-        'File::ShareDir'        => 0,
+        'File::ShareDir'        => 1.0,
         'File::Next'            => 0,
         'Log::Any'              => 0,
         'Log::Any::Adapter'     => 0.10,
@@ -44,7 +45,7 @@ my $build = Module::Build->new(
         }
     },
     add_to_cleanup     => [ 'App-CELL-*' ],
-    create_makefile_pl => 'traditional',
+    # create_makefile_pl => 'traditional',
 );
 
 $build->create_build_script;
