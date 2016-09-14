@@ -16,6 +16,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
+            "File::ShareDir::Install" : "0.11",
             "File::Spec" : "0",
             "File::Temp" : "0",
             "Log::Any::Test" : "0",
@@ -35,7 +36,7 @@
             "Date::Format" : "0",
             "File::HomeDir" : "0",
             "File::Next" : "0",
-            "File::ShareDir" : "1.00",
+            "File::ShareDir" : "1",
             "Log::Any" : "0",
             "Log::Any::Adapter" : "0.1",
             "Params::Validate" : "0",
@@ -47,14 +48,14 @@
    "provides" : {
       "App::CELL" : {
          "file" : "lib/App/CELL.pm",
-         "version" : "0.221"
+         "version" : "0.222"
       },
       "App::CELL::Config" : {
          "file" : "lib/App/CELL/Config.pm"
       },
       "App::CELL::Guide" : {
          "file" : "lib/App/CELL/Guide.pm",
-         "version" : "0.221"
+         "version" : "0.222"
       },
       "App::CELL::Load" : {
          "file" : "lib/App/CELL/Load.pm"
@@ -90,6 +91,6 @@
          "url" : "https://github.com/smithfarm/cell"
       }
    },
-   "version" : "0.221",
+   "version" : "0.222",
    "x_serialization_backend" : "JSON::PP version 2.27203"
 }

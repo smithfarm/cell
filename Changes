@@ -866,3 +866,6 @@ later are in the perl-CELL project repo.
 - README.rst: drop Release management section
 - build/ops: regenerate Makefile.PL (CPANtesters)
 
+0.222 2016-09-14 07:32 CEST
+- build/ops: use File::ShareDir::Install in Makefile.PL
+
