@@ -244,7 +244,7 @@ the sitedir for files matching this description, and attempts to load them.
 
 =head4 Core parameters
 
-As in Request Tracker, C<core> paramters have immutable values and are
+As in Request Tracker, C<core> parameters have immutable values and are
 intended to be used as "factory defaults", set by the developer, that the
 site administrator can override by setting site parameters. If the
 application is called FooApp, its core configuration settings could be
@@ -756,7 +756,7 @@ starting with C<CELL_>.
 
 =head2 Mutable and immutable parameters
 
-It is important to realize that, although core parameters can be overriden
+It is important to realize that, although core parameters can be overridden
 by site parameters, internally the values of both are immutable. Although
 it is possible to change them by cheating, the 'set' method of C<$core> and
 C<$site> will refuse to change the value of an existing core/site parameter.
