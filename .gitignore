@@ -9,4 +9,5 @@ _build
 Build
 *.tar.gz
 blib
+pm_to_blib
 *.bak
