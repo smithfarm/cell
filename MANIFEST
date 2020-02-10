@@ -17,7 +17,6 @@ lib/App/CELL/Test.pm
 lib/App/CELL/Test/LogToFile.pm
 lib/App/CELL/Util.pm
 LICENSE
-Makefile.PL
 MANIFEST
 MANIFEST.SKIP
 META.json
