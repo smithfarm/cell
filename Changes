@@ -882,3 +882,6 @@ later are in the perl-CELL project repo.
 - Build.PL: add File::ShareDir::Install to configure_requires
 - Makefile.PL: delete the file
 
+0.225 2020-02-10 23:00 CET
+- MANIFEST: drop Makefile.PL
+
