@@ -878,3 +878,7 @@ later are in the perl-CELL project repo.
 - bin/CELLdemo.plx: fix demo script
 - Load.pm: make set() take flexible number of arguments
 
+0.224 2020-02-10 22:57 CET
+- Build.PL: add File::ShareDir::Install to configure_requires
+- Makefile.PL: delete the file
+
