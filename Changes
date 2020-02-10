@@ -869,3 +869,12 @@ later are in the perl-CELL project repo.
 0.222 2016-09-14 07:32 CEST
 - build/ops: use File::ShareDir::Install in Makefile.PL
 
+0.223 2020-02-10 22:47 CET
+- Status: tweak whitespace in copyright notice
+- small spelling fixes in POD
+- cleanup: config/CELL_Config.pm: unify whitespace in set calls
+- README.rst: add more links to POD documentation
+- README.rst: attempt a bullet list
+- bin/CELLdemo.plx: fix demo script
+- Load.pm: make set() take flexible number of arguments
+
