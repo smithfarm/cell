@@ -3,21 +3,28 @@ use strict;
 use warnings;
 
 use App::CELL qw( $CELL $log $meta $core $site );
+use Data::Dumper;
 use File::HomeDir;
+use File::ShareDir;
 use File::Spec;
+use File::Touch;
 use Log::Any::Adapter ('File', File::Spec->catfile ( 
             File::HomeDir::my_home(), 'tmp', 'CELLdemo.log',
         ) 
     );
 
-print "App::CELL has not been initialized\n" if not $meta->CELL_META_INIT_STATUS_BOOL;
-$CELL->init( appname => 'CELLdemo', debug_mode => 1 );
-print "App::CELL has been initialized\n" if $meta->CELL_META_INIT_STATUS_BOOL;
+$log->init( ident => 'CELLdemo', debug_mode => 1 );
 
-print "App::CELL supports the following languages: ", @{ $site->CELL_SUPPORTED_LANGUAGES }, "\n";
+print $site->CELL_SHAREDIR_LOADED ? "Sharedir loaded\n" : "Sharedir not loaded\n";
+my $status = $CELL->load;
+print $site->CELL_SHAREDIR_LOADED ? "Sharedir loaded\n" : "Sharedir not loaded\n";
+# print( Dumper( $status ) ) if $status->not_ok;
+# exit(-1);
+
+print "App::CELL supports the following languages: ", @{ $site->CELL_SUPP_LANG }, "\n";
 
 print "CELL_CORE_SAMPLE: ", $site->CELL_CORE_SAMPLE, "\n";
-App::CELL::Config::set_site( 'CELL_CORE_SAMPLE', "foobar" );
+$site->set( 'CELL_CORE_SAMPLE', "foobar" );
 print "CELL_CORE_SAMPLE: ", $site->CELL_CORE_SAMPLE, "\n";
 $log->debug( "CELLtest.plx ending" );
 

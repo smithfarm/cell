@@ -1,5 +1,5 @@
 # ************************************************************************* 
-# Copyright (c) 2014-2015, SUSE LLC
+# Copyright (c) 2014-2020, SUSE LLC
 # 
 # All rights reserved.
 # 
@@ -415,7 +415,7 @@ sub msg {
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2014-2015, SUSE LLC
+Copyright (c) 2014-2020, SUSE LLC
 
 All rights reserved.
 

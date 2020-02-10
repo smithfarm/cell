@@ -24,3 +24,4 @@ Documentation
 * http://metacpan.org/pod/App::CELL::Message
 * http://metacpan.org/pod/App::CELL::Status
 * http://metacpan.org/pod/App::CELL::Test
+* http://metacpan.org/pod/App::CELL::Test::LogToFile

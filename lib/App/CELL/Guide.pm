@@ -1,5 +1,5 @@
 # ************************************************************************* 
-# Copyright (c) 2014-2015, SUSE LLC
+# Copyright (c) 2014-2020, SUSE LLC
 # 
 # All rights reserved.
 # 
@@ -65,7 +65,7 @@ our $VERSION = '0.222';
 L<App::CELL> is the Configuration, Error-handling, Localization, and
 Logging (CELL) framework for applications written in Perl. In the
 L</APPROACH> section, this Guide describes the CELL approach to each of
-these four areas, separately. Then, in the </RATIONALE> section,
+these four areas, separately. Then, in the L</RATIONALE> section,
 it presents the author's reasons for bundling them together.
 
 
@@ -73,8 +73,8 @@ it presents the author's reasons for bundling them together.
 =head1 HISTORY
 
 CELL was written by Smithfarm in 2013 and 2014, initially as part of the
-Dochazka project [[ link to SourceForge ]]. Due to its generic nature, it
-was spun off into a separate project.
+L<App::Dochazka::REST> project. Due to its generic nature, it was spun off into
+a separate project.
 
 
 
