@@ -748,8 +748,27 @@ sub parse_config_file {
     {
         use Try::Tiny;
         try {
-            local *set = sub($$) {
-                my ( $param, $value ) = @_;
+            local *set = sub(@) {
+                my $number_of_params = scalar @_;
+                my @params = @_;
+                my $param;
+                my $value;
+                if ( $number_of_params == 0 ) {
+                    my $msg = "set() called with no parameters";
+                    $log->crit( $msg );
+                    die $msg;
+                } elsif ( $number_of_params == 1 ) {
+                    $param = $params[0];
+                    $log->warn( "set() called with parameter $param but no value - set to \"\"" );
+                } elsif ( $number_of_params == 2 ) {
+                    $param = $params[0];
+                    $value = $params[1];
+                    $log->debug( "set() called with parameter $param and one value" );
+                } else {
+                    $param = $params[0];
+                    $value = $params[1];
+                    $log->warn( "set() called with $number_of_params parameters. Only the first two were used; the rest were ignored." );
+                }
                 my ( undef, $file, $line ) = caller;
                 $count += $self->_conf_from_config(
                     'Dest'  => $ARGS{'Dest'},
