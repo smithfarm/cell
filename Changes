@@ -897,3 +897,8 @@ later are in the perl-CELL project repo.
 - t/critic.t: add Perl::Critic-based testing
 - README.rst: add info for code maintainer
 
+0.228 2020-02-11 18:06 CET
+- README.rst: double up colons before indented passages
+- README.rst: mention "Check Manifest" tests explicitly
+- travis: try Perl 5.28 in addition to 5.24
+
