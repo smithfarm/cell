@@ -219,7 +219,7 @@ directory (available only after sitedir has been successfully loaded)
 =cut
 
 sub sitedir { 
-    return '' if not $App::CELL::Load::sitedir_loaded;
+    return '' if not $App::CELL::Load::sitedir;
     return $App::CELL::Load::sitedir;
 }
 
