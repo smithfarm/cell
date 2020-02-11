@@ -885,3 +885,7 @@ later are in the perl-CELL project repo.
 0.225 2020-02-10 23:00 CET
 - MANIFEST: drop Makefile.PL
 
+0.226 2020-02-11 15:13 CET
+- bin: fix CELLdemo.plx script
+- Status.pm: implement dump method
+
