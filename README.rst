@@ -48,7 +48,7 @@ Then::
 
     $ prove -l t/
 
-To include the Perl Critic test, do::
+To include the "Perl Critic" and "Check Manifest" tests, do::
 
     $ sudo cpanm Test::Perl::Critic
     $ sudo cpanm Test::Check::Manifest
