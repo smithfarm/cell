@@ -194,7 +194,7 @@ Always returns a true value.
 sub dump {
     my $self = shift;
     my ( %ARGS ) = validate( @_, { 'to' => 0, 'fd' => 0 } );
-    my ( $action, $level, $code, $text, $fh );
+    my ( $action, $fh );
     if ( not %ARGS ) {
         $action = 'string';
     } elsif ( exists $ARGS{'to'} ) {
@@ -215,22 +215,41 @@ sub dump {
         die "App::CELL->Status->dump() doing nothing (bad arguments)";
     }
     if ( $action eq "string" ) {
-        $level  = $self->level;
-        $code   = $self->code;
-        $text   = $self->text;
-        return "$level: ($code) $text"
+        return _dump_prep_string(
+            level => $self->level,
+            code => $self->code,
+            text => $self->text,
+        );
     } elsif ( $action eq "log" ) {
         $log->status_obj( $self );
     } elsif ( $action eq "fd" ) {
-        $level  = $self->level;
-        $code   = $self->code;
-        $text   = $self->text;
-        print $fh "$level: ($code) $text\n";
+        print $fh _dump_prep_string(
+            level => $self->level,
+            code => $self->code,
+            text => $self->text,
+        ), "\n";
     } else {
         die "App::CELL->Status->dump() doing nothing (bad things happening)";
     }
 
     return 1;
+}
+
+
+sub _dump_prep_string {
+    my %ARGS = validate( @_, {
+        'level' => 1,
+        'code' => 0,
+        'text' => 1,
+    } );
+
+    my $prepped_string = "$ARGS{'level'}: ";
+    if ( $ARGS{'code'} and $ARGS{'code'} ne $ARGS{'text'} ) {
+        $prepped_string .= "($ARGS{'code'}) ";
+    }
+    $prepped_string .= "$ARGS{'text'}";
+
+    return $prepped_string;
 }
 
 

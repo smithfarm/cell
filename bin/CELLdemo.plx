@@ -6,19 +6,17 @@ use App::CELL qw( $CELL $log $meta $core $site );
 use Data::Dumper;
 use File::Spec;
 my ( undef, $basedir, $basename ) = File::Spec->splitpath( $0 );
-print Dumper( $basedir );
-print Dumper( $basename );
-use Log::Any::Adapter( 'File', File::Spec->catfile(
-            'bin/', 'CELLdemo.log',
-        ) 
-    );
+use Log::Any::Adapter(
+    'File',
+    File::Spec->catfile( 'bin/', 'CELLdemo.log'),
+);
 
 $log->init( ident => 'CELLdemo', debug_mode => 1 );
 
 print $site->CELL_SHAREDIR_LOADED ? "Sharedir loaded\n" : "Sharedir not loaded\n";
 print "\$CELL->loaded == ", $CELL->loaded, "\n";
 my $status = $CELL->load;
-print $status->dump();
+print $status->dump(), "\n";
 print $site->CELL_SHAREDIR_LOADED ? "Sharedir loaded\n" : "Sharedir not loaded\n";
 print "\$CELL->loaded == ", $CELL->loaded, "\n";
 # print( Dumper( $status ) ) if $status->not_ok;

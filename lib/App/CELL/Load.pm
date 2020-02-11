@@ -138,26 +138,25 @@ See L<App::CELL::Guide> for details.
 =cut
 
 sub init {
-    my @ARGS = @_;
-    # process args
-    return App::CELL::Status->new( 
-               level => 'err', 
-               code => 'Odd number of arguments provided to load routine',
-           ) if ( @ARGS % 2 );
-    my %ARGS = @ARGS;
+    my %ARGS = validate( @_, {
+        enviro => { type => SCALAR, optional => 1 },
+        sitedir => { type => SCALAR, optional => 1 },
+        verbose => { type => SCALAR, default => 0 },
+    } );
 
     # determine verbosity level
     my $args_string;
-    if ( @ARGS ) {
+    if ( %ARGS ) {
         $args_string = "with arguments: " . stringify_args( \%ARGS );
     } else {
         $args_string = "without arguments";
     }
     $meta->set('CELL_META_LOAD_VERBOSE', $ARGS{'verbose'} || 0);
 
-    $log->info( "Entering App::CELL::Load::init " . 
-        "from " . (caller)[0] . " $args_string",
-        cell => 1) if $meta->CELL_META_LOAD_VERBOSE;
+    $log->info(
+        "Entering App::CELL::Load::init from " . (caller)[0] . " $args_string",
+        cell => 1
+    ) if $meta->CELL_META_LOAD_VERBOSE;
 
     # check for taint mode
     if ( ${^TAINT} != 0 ) {
