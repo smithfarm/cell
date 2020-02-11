@@ -38,7 +38,9 @@ t/070-config.t
 t/100-cell.t
 t/110-site.t
 t/111-site.t
+t/critic.t
 t/manifest.t
+t/perlcriticrc
 t/pod-coverage.t
 t/pod.t
 WISHLIST

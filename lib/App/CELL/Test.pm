@@ -145,10 +145,9 @@ Touch a file
 sub _touch {
     my ( $file ) = @_;
     my $now = time;
-    local (*TMP);
 
     utime ($now, $now, $file)
-                || open (TMP, ">>$file")
+                || open my $fh, ">>", $file
                 || warn ("Couldn't touch file: $!\n");
 } 
 
