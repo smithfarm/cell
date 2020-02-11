@@ -215,8 +215,11 @@ log messages:
 
 To actually see your log messages, you have to do something like this:
 
-    use Log::Any::Adapter ('File', $ENV{'HOME'} . '/tmp/CELLtest.log');
+    use Log::Any::Adapter ( 'File', $ENV{'HOME'} . '/CELLtest.log' );
 
+or, even simpler:
+
+    use Log::Any::Adapter ( 'Stderr' );
 
 
 
