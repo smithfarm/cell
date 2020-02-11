@@ -215,7 +215,7 @@ sub dump {
         die "App::CELL->Status->dump() doing nothing (bad arguments)";
     }
     if ( $action eq "string" ) {
-        return _dump_prep_string(
+        return _prep_dump_string(
             level => $self->level,
             code => $self->code,
             text => $self->text,
@@ -223,7 +223,7 @@ sub dump {
     } elsif ( $action eq "log" ) {
         $log->status_obj( $self );
     } elsif ( $action eq "fd" ) {
-        print $fh _dump_prep_string(
+        print $fh _prep_dump_string(
             level => $self->level,
             code => $self->code,
             text => $self->text,
@@ -236,7 +236,7 @@ sub dump {
 }
 
 
-sub _dump_prep_string {
+sub _prep_dump_string {
     my %ARGS = validate( @_, {
         'level' => 1,
         'code' => 0,

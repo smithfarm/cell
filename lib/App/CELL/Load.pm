@@ -344,7 +344,7 @@ sub meta_core_site_files {
 
     foreach my $type ( 'meta', 'core', 'site' ) {
         my $fulltype = 'App::CELL::Config::' . $type;
-        #$log->debug( "\$fulltype is $fulltype");
+        #$log->debug( "\$fulltype is $fulltype", cell => 1 );
         my $file_list = find_files( $type, $confdir );
         foreach my $file ( @$file_list ) {
             no strict 'refs';
@@ -597,8 +597,10 @@ sub parse_message_file {
         # put first token on first line into $code
         my ( $code ) = $stanza->[0] =~ m/^\s*(\S+)/;
         if ( not $code ) {
-            $log->info( "ERROR: Could not process stanza ->"
-                . join( " ", @$stanza ) . "<- in $file" );
+            $log->info(
+                "ERROR: Could not process stanza ->" . join( " ", @$stanza ) . "<- in $file",
+                cell => 1,
+            );
             return 0;
         }
 
@@ -610,18 +612,26 @@ sub parse_message_file {
         }
         $text =~ s/^\s+//g;
         if ( $code and $lang and $text ) {
-            $log->debug( "Parsed message CODE ->$code<- LANG ->$lang<- TEXT ->$text<-" );
+            $log->debug(
+                "Parsed message CODE ->$code<- LANG ->$lang<- TEXT ->$text<-",
+                cell => 1,
+            );
             # we have a candidate, but we don't want to overwrite
             # an existing entry with the same $code-$lang pair
             if ( $destref->{ $code }->{ $lang } ) {
                 my $existing_text = $destref->{ $code }->{ $lang }->{ 'Text' };
-                $log->error( "ERROR: not loading code-lang pair ->$code"
-                        . "/$lang<- with text ->$text<- because this would"
-                        . " overwrite existing pair from " .  $destref->{$code}->{$lang}->{'File'} );
+                $log->error(
+                    "ERROR: not loading code-lang pair ->$code" .
+                    "/$lang<- with text ->$text<- because this would" .
+                    " overwrite existing pair from " . $destref->{$code}->{$lang}->{'File'},
+                    cell => 1,
+                );
                 return 0;
             } else {
-                $log->debug( "OK: loading code-lang pair ->$code/$lang<- with text ->$text<-" )
-                    if $meta->CELL_META_LOAD_VERBOSE;
+                $log->debug(
+                        "OK: loading code-lang pair ->$code/$lang<- with text ->$text<-",
+                        cell => 1,
+                    ) if $meta->CELL_META_LOAD_VERBOSE;
                 $destref->{ $code }->{ $lang } = {
                     'Text' => $text,
                     'File' => $file,
@@ -630,16 +640,21 @@ sub parse_message_file {
                 return 1;
             }
         }
-        $log->error( "Parsed " . ( $code || "<NO_CODE>" ) . " but something missing!!" );
+        $log->error(
+            "Parsed " . ( $code || "<NO_CODE>" ) . " but something missing!!",
+            cell => 1,
+        );
         return 0;
     };
 
     # determine language from file name
     my ( $lang ) = $ARGS{'File'} =~ m/_Message_([^_]+).conf$/;
     if ( not $lang ) {
-        $log->warn( "Could not determine language from filename "
-            . "$ARGS{'File'} -- reverting to default language "
-            . "->en<-" );
+        $log->warn(
+            "Could not determine language from filename $ARGS{'File'} " .
+            "-- reverting to default language ->en<-",
+            cell => 1,
+        );
         $lang = 'en';
     }
 
@@ -654,7 +669,7 @@ sub parse_message_file {
     while ( <$fh> ) {
         chomp( $_ );
         $line += 1;
-        #$log->debug( "Read line =>$_<= from $ARGS{'File'}" );
+        #$log->debug( "Read line =>$_<= from $ARGS{'File'}", cell => 1 );
         $_ = '' if /^\s+$/;
         if ( $_ ) { 
             if ( ! /^\s*#/ ) {
@@ -676,8 +691,7 @@ sub parse_message_file {
     close $fh;
 
 #    $log->info( "Parsed and loaded $count configuration stanzas "
-#              . "from $ARGS{'File'}" );
-#    $log->info( Dumper( $ARGS{'Dest'} ) );
+#              . "from $ARGS{'File'}", cell => 1 );
     
     return $count;
 };
@@ -739,9 +753,12 @@ sub parse_config_file {
     
     # ideally this should be 'debug' for sharedir and 'info' for sitedir
     # but in this routine I have no easy way of telling one from the other
-    $log->debug( "Loading =>$ARGS{'File'}<=" );
+    $log->debug( "Loading =>$ARGS{'File'}<=", cell => 1 );
     if ( not ref( $ARGS{'Dest'} ) ) {
-        $log->warn("Something strange happened: destination is not a reference?!?");
+        $log->warn(
+            "Something strange happened: destination is not a reference?!?",
+            cell => 1,
+        );
     }
 
     {
@@ -754,19 +771,29 @@ sub parse_config_file {
                 my $value;
                 if ( $number_of_params == 0 ) {
                     my $msg = "set() called with no parameters";
-                    $log->crit( $msg );
+                    $log->crit( $msg, cell => 1 );
                     die $msg;
                 } elsif ( $number_of_params == 1 ) {
                     $param = $params[0];
-                    $log->warn( "set() called with parameter $param but no value - set to \"\"" );
+                    $log->warn(
+                        "set() called with parameter $param but no value - set to \"\"",
+                        cell => 1,
+                    );
                 } elsif ( $number_of_params == 2 ) {
                     $param = $params[0];
                     $value = $params[1];
-                    $log->debug( "set() called with parameter $param and one value" );
+                    $log->debug(
+                        "set() called with parameter $param and one value",
+                        cell => 1,
+                    );
                 } else {
                     $param = $params[0];
                     $value = $params[1];
-                    $log->warn( "set() called with $number_of_params parameters. Only the first two were used; the rest were ignored." );
+                    $log->warn(
+                        "set() called with $number_of_params parameters. Only " .
+                        "the first two were used; the rest were ignored.",
+                        cell => 1,
+                    );
                 }
                 my ( undef, $file, $line ) = caller;
                 $count += $self->_conf_from_config(
@@ -782,13 +809,16 @@ sub parse_config_file {
         catch {
            my $errmsg = $_;
            $errmsg =~ s/\012/ -- /g;
-           $log->err("CELL_CONFIG_LOAD_FAIL on file $ARGS{File} with error message: $errmsg");
-           $log->debug( "The count is $count" );
+           $log->err(
+               "CELL_CONFIG_LOAD_FAIL on file $ARGS{File} with error message: $errmsg",
+               cell => 1,
+           );
+           $log->debug( "The count is $count", cell => 1 );
            return $count;
         };
     }
     #$log->info( "Successfully loaded $count configuration parameters "
-    #          . "from $ARGS{'File'}" );
+    #          . "from $ARGS{'File'}", cell => 1 );
 
     return $count;
 }
@@ -830,10 +860,12 @@ sub _conf_from_config {
 
     if ( keys( %{ $desthash->{ $param } } ) ) 
     {
-        $log->warn( "ignoring duplicate definition of config "
-                  . "parameter $param in line $line of config file $file "
-                  . "because it conflicts with a similar parameter in "
-                  . $desthash->{ $param }->{'File'} );
+        $log->warn(
+            "ignoring duplicate definition of config parameter $param in line $line " .
+            "of config file $file because it conflicts with a similar parameter in " .
+            $desthash->{ $param }->{'File'},
+            cell => 1,
+        );
         return 0;
     } else {
         $desthash->{ $param } = {
@@ -841,9 +873,11 @@ sub _conf_from_config {
                                     'File'  => $file,
                                     'Line'  => $line,
                                 }; 
-        $log->debug( "Parsed parameter $param " .
-                    "from $file, line $line", suppress_caller => 1 )
-            if $meta->CELL_META_LOAD_VERBOSE;
+        $log->debug(
+                "Parsed parameter $param from $file, line $line",
+                cell => 1, 
+                suppress_caller => 1
+            ) if $meta->CELL_META_LOAD_VERBOSE;
         return 1;
     } 
 }

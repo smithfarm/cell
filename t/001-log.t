@@ -51,8 +51,8 @@ $log->clear();
 $log->init( debug_mode => 0 );
 $status = App::CELL::Status->new( level => 'NOTICE', 
               code => 'CELL_TEST_MESSAGE' );
-#diag( Dumper $status );
-$log->contains_only_ok( '\(CELL\) NOTICE: This is a test message', "NOTICE test message ok" );
+# diag( $status->dump() );
+$log->contains_only_ok( 'NOTICE: \(CELL_TEST_MESSAGE\) This is a test message', "NOTICE test message ok" );
 
 $log->trace("foo");
 $log->empty_ok("No trace when debug_mode off");

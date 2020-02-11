@@ -269,7 +269,6 @@ sub set {
                                'Line' => (caller)[2],
                                'Value' => $value,
                           };
-        #$log->debug( Dumper $meta );
     } elsif ( $self->{'CELL_CONFTYPE'} eq 'core' ) {
         if ( exists $core->{$param} ) {
             %ARGS = (
