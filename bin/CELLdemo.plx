@@ -4,20 +4,23 @@ use warnings;
 
 use App::CELL qw( $CELL $log $meta $core $site );
 use Data::Dumper;
-use File::HomeDir;
-use File::ShareDir;
 use File::Spec;
-use File::Touch;
-use Log::Any::Adapter ('File', File::Spec->catfile ( 
-            File::HomeDir::my_home(), 'tmp', 'CELLdemo.log',
+my ( undef, $basedir, $basename ) = File::Spec->splitpath( $0 );
+print Dumper( $basedir );
+print Dumper( $basename );
+use Log::Any::Adapter( 'File', File::Spec->catfile(
+            'bin/', 'CELLdemo.log',
         ) 
     );
 
 $log->init( ident => 'CELLdemo', debug_mode => 1 );
 
 print $site->CELL_SHAREDIR_LOADED ? "Sharedir loaded\n" : "Sharedir not loaded\n";
+print "\$CELL->loaded == ", $CELL->loaded, "\n";
 my $status = $CELL->load;
+print $status->dump();
 print $site->CELL_SHAREDIR_LOADED ? "Sharedir loaded\n" : "Sharedir not loaded\n";
+print "\$CELL->loaded == ", $CELL->loaded, "\n";
 # print( Dumper( $status ) ) if $status->not_ok;
 # exit(-1);
 
