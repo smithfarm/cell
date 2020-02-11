@@ -29,6 +29,10 @@ print "App::CELL supports the following languages: ", @{ $site->CELL_SUPP_LANG }
 print "CELL_CORE_SAMPLE: ", $site->CELL_CORE_SAMPLE, "\n";
 $site->set( 'CELL_CORE_SAMPLE', "foobar" );
 print "CELL_CORE_SAMPLE: ", $site->CELL_CORE_SAMPLE, "\n";
+
+$status = $CELL->status_warn( 'CELL_TEST_MESSAGE' );
+$status->dump( fd => \*STDOUT );
+
 $log->debug( "CELLtest.plx ending" );
 
 __END__
