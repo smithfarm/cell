@@ -62,19 +62,19 @@ our $VERSION = '0.225';
 
 =head1 INTRODUCTION
 
-L<App::CELL> is the Configuration, Error-handling, Localization, and
-Logging (CELL) framework for applications written in Perl. In the
-L</APPROACH> section, this Guide describes the CELL approach to each of
-these four areas, separately. Then, in the L</RATIONALE> section,
-it presents the author's reasons for bundling them together.
+L<App::CELL> is the Configuration, Error-handling, Localization, and Logging
+(CELL) framework for applications written in Perl. In the L</GENERAL APPROACH>
+section, this Guide describes the CELL approach to each of these four areas,
+separately. Then, in the L</RATIONALE> section, it presents the author's reasons
+for bundling them together.
 
 
 
 =head1 HISTORY
 
-CELL was written by Smithfarm in 2013 and 2014, initially as part of the
-L<App::Dochazka::REST> project. Due to its generic nature, it was spun off into
-a separate project.
+The original L<App::CELL> was written by Nathan Cutler in 2013 and 2014,
+initially as part of the L<App::Dochazka::REST> project. Later, with a view to
+its generic nature, it was spun off into a separate project.
 
 
 
