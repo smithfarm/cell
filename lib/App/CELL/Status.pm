@@ -1,5 +1,5 @@
 # *************************************************************************
-# Copyright (c) 2014-2017, SUSE LLC
+# Copyright (c) 2014-2020, SUSE LLC
 #
 # All rights reserved.
 #
@@ -38,6 +38,8 @@ use 5.012;
 
 use App::CELL::Log qw( $log );
 use App::CELL::Util qw( stringify_args );
+use Data::Dumper;
+use Params::Validate qw( :all );
 use Storable qw( dclone );
 use Scalar::Util qw( blessed );
 use Try::Tiny;
@@ -169,40 +171,67 @@ sub new {
 }
 
 
-#=head2 dump
-#
-#Dump an existing status object. Takes: PARAMHASH. Parameter 'to' determines
-#destination, which can be 'string' (default), 'log' or 'fd'.
-#
-#    # dump object to string
-#    my $dump_str = $status->dump();
-#       $dump_str = $status->dump( to => 'string' );
-#    
-#    # dump object to log
-#    $status->dump( to => 'log' );
-#
-#    # dump object to file descriptor
-#    $status->dump( fd => STDOUT );
-#    $status->dump( to => 'fd', fd => STDOUT );
-#
-#Always returns a true value.
-#
-#=cut
-#
-#sub dump {
-#    my ( $self, %ARGS ) = shift;
-#    if ( not %ARGS ) {
-#        $log->status_obj( $self );
-#    } else {
-#        if ( exists $ARGS{fd} ) {
-#            $log->debug( "Future dump-to-fd code goes here" );
-#        } else {
-#            $log->debug( "Doing nothing" );
-#        }
-#    }
-#
-#    return 1;
-#}
+=head2 dump
+
+Dump an existing status object. Takes: PARAMHASH. Parameter 'to' determines
+destination, which can be 'string' (default), 'log' or 'fd'.
+
+    # dump object to string
+    my $dump_str = $status->dump();
+       $dump_str = $status->dump( to => 'string' );
+
+    # dump object to log
+    $status->dump( to => 'log' );
+
+    # dump object to file descriptor
+    $status->dump( fd => STDOUT );
+    $status->dump( to => 'fd', fd => \*STDOUT );
+
+Always returns a true value.
+
+=cut
+
+sub dump {
+    my $self = shift;
+    my ( %ARGS ) = validate( @_, { 'to' => 0, 'fd' => 0 } );
+    my ( $action, $level, $code, $text, $fh );
+    if ( not %ARGS ) {
+        $action = 'string';
+    } elsif ( exists $ARGS{'to'} ) {
+        if ( $ARGS{'to'} eq 'string' ) {
+            $action = 'string';
+        } elsif ( $ARGS{'to'} eq 'log' ) {
+            $action = 'log';
+        } elsif ( $ARGS{'to'} eq 'fd' and exists $ARGS{'fd'} ) {
+            $action = 'fd';
+            $fh = $ARGS{'fd'};
+        } else {
+            die "App::CELL->Status->dump() doing nothing (bad arguments)";
+        }
+    } elsif ( exists $ARGS{'fd'} ) {
+        $action = 'fd';
+        $fh = $ARGS{'fd'};
+    } else {
+        die "App::CELL->Status->dump() doing nothing (bad arguments)";
+    }
+    if ( $action eq "string" ) {
+        $level  = $self->level;
+        $code   = $self->code;
+        $text   = $self->text;
+        return "$level: ($code) $text"
+    } elsif ( $action eq "log" ) {
+        $log->status_obj( $self );
+    } elsif ( $action eq "fd" ) {
+        $level  = $self->level;
+        $code   = $self->code;
+        $text   = $self->text;
+        print $fh "$level: ($code) $text\n";
+    } else {
+        die "App::CELL->Status->dump() doing nothing (bad things happening)";
+    }
+
+    return 1;
+}
 
 
 =head2 ok

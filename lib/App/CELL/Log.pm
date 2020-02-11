@@ -325,6 +325,9 @@ sub AUTOLOAD {
     $log->init( ident => $ident ) if not $log_any_obj;
     die "No Log::Any object!" if not $log_any_obj;
     return if not $debug_mode and ( $method_lc eq 'debug' or $method_lc eq 'trace' );
+    if ( not $msg_text ) {
+        $msg_text = "<NO_TEXT>"
+    }
     $log_any_obj->$method_lc( _assemble_log_message( "$cell$level: $msg_text", $file, $line ) );
     return;
 }

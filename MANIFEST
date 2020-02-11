@@ -33,6 +33,7 @@ t/030-status.t
 t/031-status_ok.t
 t/032-status-expurgate.t
 t/033-status-accessor.t
+t/034-status-dump.t
 t/050-load.t
 t/070-config.t
 t/100-cell.t
