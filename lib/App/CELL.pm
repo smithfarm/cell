@@ -328,7 +328,7 @@ BEGIN {
             return App::CELL::Status->new(
                 level => $level_uc,
                 code => $code,
-                caller => [ caller ],
+                caller => [ CORE::caller() ],
                 %ARGS,
             );
         }

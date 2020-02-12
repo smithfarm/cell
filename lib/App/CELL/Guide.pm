@@ -523,7 +523,7 @@ It is also possible to report the caller's filename and line number:
     App::CELL::Status->new( level => 'ERR', 
                            code => 'CODE1',
                            args => [ 'foo', 'bar' ],
-                           caller => [ caller ],
+                           caller => [ CORE::caller() ],
                          );
 
 It is also possible to pass a message object in lieu of C<code> and
