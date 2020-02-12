@@ -902,3 +902,7 @@ later are in the perl-CELL project repo.
 - README.rst: mention "Check Manifest" tests explicitly
 - travis: try Perl 5.28 in addition to 5.24
 
+0.229 2020-02-12 12:13 CET
+- Qualify all calls to CORE::caller()
+- t/034-status-dump.t: use Test::Output
+
