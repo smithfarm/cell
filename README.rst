@@ -2,8 +2,7 @@
 App::CELL
 =========
 
-.. image:: https://travis-ci.org/smithfarm/cell.svg?branch=master
-    :target: https://travis-ci.org/smithfarm/cell
+.. image:: https://travis-ci.org/smithfarm/cell.svg?branch=master :target: https://travis-ci.org/smithfarm/cell
 
 .. image:: https://badge.fury.io/pl/App-CELL.svg
     :target: https://badge.fury.io/pl/App-CELL
@@ -11,6 +10,7 @@ App::CELL
 --------------------------------------------------------------------
 Configuration, Error-handling, Localization, and Logging "framework"
 --------------------------------------------------------------------
+
 
 General Documentation
 =====================
@@ -25,6 +25,13 @@ General Documentation
 * http://metacpan.org/pod/App::CELL::Status
 * http://metacpan.org/pod/App::CELL::Test
 * http://metacpan.org/pod/App::CELL::Test::LogToFile
+
+
+Contributor Documentation
+=========================
+
+All would-be contributors should first read ``CONTRIBUTING.rst``.
+
 
 Maintainer Documentation
 ========================
