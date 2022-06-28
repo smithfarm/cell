@@ -910,3 +910,7 @@ later are in the perl-CELL project repo.
 - CONTRIBUTING.rst: add new file
 - bootstrap.sh: add new file and update README.rst
 
+0.231 2022-06-28 12:05 CEST
+- MANIFEST.SKIP: add bootstrap.sh
+- bootstrap.sh: install cpanspec package
+
