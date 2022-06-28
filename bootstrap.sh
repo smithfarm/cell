@@ -9,7 +9,8 @@ sudo zypper --non-interactive install \
     perl-Test-Output \
     perl-Test-Warnings \
     perl-Perl-Version \
-    perl-CPAN-Uploader
+    perl-CPAN-Uploader \
+    cpanspec
 perl Build.PL
 ./Build
 sudo ./Build install
